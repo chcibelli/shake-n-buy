@@ -13,14 +13,14 @@
 	<meta property="og:url" content="https://chcibelli.github.io/shake-n-buy/">
 	<meta property="og:title" content="¿No sabes qué comprar? Te tiramos una idea random ya!">
 	<meta property="og:description" content="Decidi cuanto queres gastar, click y listo!">
-<!--	<meta property="og:image" content="https://chcibelli.github.io/meli-age/img-alta/1999_full.png"> -->
+	<meta property="og:image" content="https://chcibelli.github.io/shake-n-buy/img/share.jpg">
 	
 	<!-- Twitter -->
 	<meta property="twitter:card" content="summary_large_image">
 	<meta property="twitter:url" content="https://chcibelli.github.io/shake-n-buy/">
-	<meta property="twitter:title" content="¿Sabes cuánto hace que compras y vendes por Mercado Libre?">
-	<meta property="twitter:description" content="Enterate cuanto tiempo hace que compras y vendes por Mercado Libre!">
-<!--	<meta property="twitter:image" content="https://chcibelli.github.io/meli-age/img-alta/1999_full.png"> -->
+	<meta property="twitter:title" content="¿No sabes qué comprar? Te tiramos una idea random ya!">
+	<meta property="twitter:description" content="Decidi cuanto queres gastar, click y listo!">
+	<meta property="twitter:image" content="https://chcibelli.github.io/shake-n-buy/img/share.jpg">
 	
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -31,14 +31,20 @@
 	<script type="text/javascript" async src="https://platform.twitter.com/widgets.js"></script>
 	
 	<link href="main.css" rel="stylesheet">
-	<script src="main.js?v=1.5"></script>
+	<script src="main.js?v=1.0"></script>
 
 </head>
 <body class="text-center">
 	
 	<main class="form-signin">
 		<h1 class="h3 mb-4 fw-normal">¿No sabes qué comprar? Te tiramos una idea random YA!</h1>
-				
+
+		<div class="form-floating mb-3">
+			<select class="form-select form-select-sm" id="hidden_site">
+				<option selected value="">Elegí tu país</option>
+			</select>
+		</div>
+		
 		<div class="form-floating mb-3">
 			<input type="text" id="tope" class="form-control" id="floatingInput" value="">
 			<label for="floatingInput">¿Cuánto queres gastar en $ARS?</label>
