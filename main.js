@@ -48,5 +48,9 @@ $( document ).ready(function() {
             $('#main-btn').click();
         }
     });
-    
+
+    $("#tope").inputFilter(function(value) {
+        return /^\d*$/.test(value);
+      });
+  
 });
