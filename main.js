@@ -69,6 +69,7 @@ $( document ).ready(function() {
                 }
 
                 Shuffle(randomItems);
+                Shuffle(randomItems);
 
                 let result = '<p><img src="'+randomItems[0].thumbnail+'" class="product-img"></p>';
                 result += '<p class="title">'+randomItems[0].title+'</p>';
