@@ -62,7 +62,8 @@ $( document ).ready(function() {
                             title:item.title,
                             permalink:item.permalink,
                             free_shipping:item.shipping.free_shipping,
-                            listing_type:item.listing_type_id})};
+                            listing_type:item.listing_type_id,
+                            difference:(item.price/tope*100)})};
                         });
                         
                         if(randomItems.length < 1) {
@@ -75,7 +76,9 @@ $( document ).ready(function() {
                         
                         Shuffle(randomItems);
                         Shuffle(randomItems);
-                        
+
+                        randomItems.sort(compare);
+                                                
                         randomItems[0].thumbnail = randomItems[0].thumbnail.replace('http://','https://');
                         
                         let result = '<p><a target="_blank" href="'+randomItems[0].permalink+'""><img src="'+randomItems[0].thumbnail+'" class="product-img"></a></p>';
@@ -125,5 +128,19 @@ $( document ).ready(function() {
                 for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
                 return o;
             };
+
+            function compare(a, b) {
+                const bandA = a.difference;
+                const bandB = b.difference;
+              
+                let comparison = 0;
+                if (bandA < bandB) {
+                  comparison = 1;
+                } else if (bandA > bandB) {
+                  comparison = -1;
+                }
+                return comparison;
+              }
+                          
             
         });
