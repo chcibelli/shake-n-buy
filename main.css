@@ -38,7 +38,7 @@ body {
     border-top: 1px gray solid;
     padding-top:8px;
     padding-bottom: 8px;
-    display: none;
+    display: block;
 }
 
 #result p {
@@ -56,4 +56,18 @@ body {
 
 .info {
     font-weight: normal;
+}
+
+.title {
+    font-size: 20px;
+}
+
+.price {
+    font-weight: 300;
+    font-size: 30px;
+}
+
+.product-img {
+    max-width:320px;
+    max-height: 200px;
 }

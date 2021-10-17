@@ -1,44 +1,82 @@
 $( document ).ready(function() {
 
+    let apiCategories = 'https://api.mercadolibre.com/sites/MLA/categories';
+
+    $.getJSON(apiCategories, function(data) {
+
+            var availableCategories = [];
+            $.each(data, function(i,category){
+                if(category.id == 'MLA1071' || category.id == 'MLA1540' || category.id == 'MLA1512') {
+                } else {
+                    availableCategories.push({label:category.name, value:category.id});
+                }
+            });
+
+            for(t=0;t<availableCategories.length;t++) {
+                $("#hidden_categories").append(new Option(availableCategories[t].label, availableCategories[t].value));
+            }
+                    
+    });			
+
     $( "#main-btn" ).click(function() {
         
         $('#result').hide();
         
         let tope = $('#tope').val();
+        let site = 'MLA';
+        let category = $('#hidden_categories').val();
         
-        if(tope == '') {
-            $('#result').html('<p>Completa cuanto queres gastar 🤔</p>');
+        if(tope == '' || category == '') {
+            $('#result').html('<p>Elegí una categoróa y completa cuanto queres gastar 🤔</p>');
             $('#result').show();
             $('#share').html('');
             $('#share').hide();
             return false;
         }
         
-        let url = 'https://api.mercadolibre.com/sites/'+site+'/search?q='+tope.trim();
+        let url = 'https://api.mercadolibre.com/sites/'+site+'/search?status=active&category='+category;
 
         $.getJSON(url, function(data) {
-            
-            if (typeof data.seller === "undefined") {
-                $('#result').html('<p> No encontre nada 😢</p>');
+
+            if (typeof data.results === "undefined") {
+                $('#result').html('<p> No encontre nada por ese precio 😢</p>');
                 $('#share').html('');
                 $('#share').hide();
                 $('#result').show();
             } else {
-                let result = '<p>XXXX</p>';
-                
-                result += '<p>XXXXX ';
-                result += '</p>';
-                
+
+                var randomItems = [];
+
+                $.each(data.results, function(i,item){
+                    if(item.price <= tope) {
+                        randomItems.push({id:item.id, price:item.price, thumbnail:item.thumbnail,title:item.title,permalink:item.permalink})
+                    }
+                });
+
+                if(randomItems.length < 1) {
+                    $('#result').html('<p> No encontre nada por ese precio 😢</p>');
+                    $('#share').html('');
+                    $('#share').hide();
+                    $('#result').show();    
+                    return false;
+                }
+
+                Shuffle(randomItems);
+
+                let result = '<p><img src="'+randomItems[0].thumbnail+'" class="product-img"></p>';
+                result += '<p class="title">'+randomItems[0].title+'</p>';
+                result += '<p class="price">$ '+randomItems[0].price+'</p>';
+                result += '<a target="_blank" href="'+randomItems[0].permalink+'" class="w-100 btn btn-lg btn-primary mb-3">Comprar ahora</a>';
                 result += '<p class="divider"></p>'
                                 
-                let tweet = 'XXXX ';
-                tweet += ' 👀 👀 Averigualo en 👇 ';
+                let tweet = '¿No sabes qué comprar o regalar? 📦 ';
+                tweet += ' 👀 👀 Busca tu próxima compra random de Mercado Libre en 👇 ';
                 
                 $('#share').html('<a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large"  data-url="https://chcibelli.github.io/shake-n-buy/" data-text="'+tweet+'">Tweet</a>');
                 twttr.widgets.load();
                 
                 $('#result').html(result);
-                $('#result, #share').show();                
+                $('#result, #share').show();         
             }
         });			
     });	
@@ -51,33 +89,13 @@ $( document ).ready(function() {
         if (e.which > 31 && (e.which < 48 || e.which > 57)) {
             return false;
         }
-        
+
         return true;
     });
 
-    var availableSites = [ 
-        {label:"Argentina 🇦🇷", value:"MLA"}, 
-        {label:"Bolivia 🇧🇴",value:"MBO"},
-        {label:"Brasil 🇧🇷", value:"MLB"},
-        {label:"Chile 🇨🇱", value:"MLC"},
-        {label:"Colombia 🇨🇴", value:"MCO"},
-        {label:"Costa Rica 🇨🇷", value:"MCR"},
-        {label:"Cuba 🇨🇺", value:"MCU"},
-        {label:"Dominicana 🇩🇴", value:"MRD"},
-        {label:"Ecuador 🇪🇨", value:"MEC"},
-        {label:"Guatemala 🇬🇹", value:"MGT"},
-        {label:"Honduras 🇭🇳", value:"MHN"},
-        {label:"Mexico 🇲🇽", value:"MLM"},
-        {label:"Nicaragua 🇳🇮", value:"MNI"},
-        {label:"Panama 🇵🇦", value:"MPA"},
-        {label:"Paraguay 🇵🇾", value:"MPY"},
-        {label:"Perú 🇵🇪", value:"MPE"},
-        {label:"Uruguay 🇺🇾", value:"MLU"},
-        {label:"Venezuela 🇻🇪", value:"MLV"}
-    ];
-
-    for(t=0;t<availableSites.length;t++) {
-        $("#hidden_site").append(new Option(availableSites[t].label, availableSites[t].value));
-    }    
+    function Shuffle(o) {
+        for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        return o;
+    };
 
 });
