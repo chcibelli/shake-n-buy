@@ -1,6 +1,7 @@
 $( document ).ready(function() {
 
     var step = 1;
+    var showedItems = [];
     
     let apiCategories = 'https://api.mercadolibre.com/sites/MLA/categories';
     
@@ -55,7 +56,7 @@ $( document ).ready(function() {
                 var randomItems = [];
                 
                 $.each(data.results, function(i,item){
-                    if(item.price <= tope) {
+                    if(item.price <= tope && !showedItems.includes(item.id)) {
                         randomItems.push({id:item.id, 
                             price:item.price, 
                             thumbnail:item.thumbnail,
@@ -77,7 +78,9 @@ $( document ).ready(function() {
                         Shuffle(randomItems);
                         Shuffle(randomItems);
 
-                        //randomItems.sort(compare);
+                        randomItems.sort(compare);
+
+                        showedItems.push(randomItems[0].id);
                                                 
                         randomItems[0].thumbnail = randomItems[0].thumbnail.replace('http://','https://');
                         
