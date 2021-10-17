@@ -71,3 +71,13 @@ body {
     max-width:320px;
     max-height: 200px;
 }
+
+.shipping {
+    color: #00a650;
+    font-size:16px;
+}
+
+.listing_type {
+    color: #00a650;
+    font-size:16px;
+}

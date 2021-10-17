@@ -49,7 +49,13 @@ $( document ).ready(function() {
 
                 $.each(data.results, function(i,item){
                     if(item.price <= tope) {
-                        randomItems.push({id:item.id, price:item.price, thumbnail:item.thumbnail,title:item.title,permalink:item.permalink})
+                        randomItems.push({id:item.id, 
+                                            price:item.price, 
+                                            thumbnail:item.thumbnail,
+                                            title:item.title,
+                                            permalink:item.permalink,
+                                            free_shipping:item.shipping.free_shipping,
+                                            listing_type:item.listing_type_id})
                     }
                 });
 
@@ -63,9 +69,16 @@ $( document ).ready(function() {
 
                 Shuffle(randomItems);
 
+                console.log(randomItems);
+
                 let result = '<p><img src="'+randomItems[0].thumbnail+'" class="product-img"></p>';
                 result += '<p class="title">'+randomItems[0].title+'</p>';
                 result += '<p class="price">$ '+randomItems[0].price+'</p>';
+
+                if(randomItems[0].free_shipping) { result += '<p class="shipping">Envío gratis</p>'; }
+
+                if(randomItems[0].listing_type == 'gold_pro') { result += '<p class="listing_type">Cuotas sin interes</p>'; }
+
                 result += '<a target="_blank" href="'+randomItems[0].permalink+'" class="w-100 btn btn-lg btn-primary mb-3">Comprar ahora</a>';
                 result += '<p class="divider"></p>'
                                 
