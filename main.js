@@ -1,4 +1,6 @@
 $( document ).ready(function() {
+
+    var step = 1;
     
     let apiCategories = 'https://api.mercadolibre.com/sites/MLA/categories';
     
@@ -49,9 +51,7 @@ $( document ).ready(function() {
                 $('#share').hide();
                 $('#result').show();
             } else {
-                
-                console.log(data.results);
-                
+                                
                 var randomItems = [];
                 
                 $.each(data.results, function(i,item){
@@ -94,7 +94,15 @@ $( document ).ready(function() {
                         
                         $('#share').html('<a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large"  data-url="https://chcibelli.github.io/shake-n-buy/" data-text="'+tweet+'">Tweet</a>');
                         twttr.widgets.load();
-                        
+
+                        if(step == 1) {
+                            $('#main-btn').html('No me gusto, dame otra cosa!');
+                            step = 2;
+                        } else {
+                            $('#main-btn').html('Sigue sin gustarme! Otra!');
+                            step = 1;
+                        }
+
                         $('#result').html(result);
                         $('#result, #share').show();  
                     }
