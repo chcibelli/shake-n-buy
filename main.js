@@ -33,7 +33,10 @@ $( document ).ready(function() {
             $('#share').hide();
             return false;
         }
-        
+
+        $('.form-signin').effect( "shake" );
+        $('.form-signin').effect( "shake" );
+
         let url = 'https://api.mercadolibre.com/sites/'+site+'/search?status=active&category='+category;
 
         $.getJSON(url, function(data) {
@@ -68,8 +71,6 @@ $( document ).ready(function() {
                 }
 
                 Shuffle(randomItems);
-
-                console.log(randomItems);
 
                 let result = '<p><img src="'+randomItems[0].thumbnail+'" class="product-img"></p>';
                 result += '<p class="title">'+randomItems[0].title+'</p>';
