@@ -35,7 +35,6 @@ $( document ).ready(function() {
         }
 
         $('.form-signin').effect( "shake" );
-        $('.form-signin').effect( "shake" );
 
         let url = 'https://api.mercadolibre.com/sites/'+site+'/search?status=active&category='+category;
 
