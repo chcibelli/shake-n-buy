@@ -78,7 +78,7 @@ $( document ).ready(function() {
                         
                         randomItems[0].thumbnail = randomItems[0].thumbnail.replace('http://','https://');
                         
-                        let result = '<p><img src="'+randomItems[0].thumbnail+'" class="product-img"></p>';
+                        let result = '<p><a target="_blank" href="'+randomItems[0].permalink+'""><img src="'+randomItems[0].thumbnail+'" class="product-img"></a></p>';
                         result += '<p class="title">'+randomItems[0].title+'</p>';
                         result += '<p class="price">$ '+randomItems[0].price+'</p>';
                         
