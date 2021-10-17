@@ -77,7 +77,7 @@ $( document ).ready(function() {
                         Shuffle(randomItems);
                         Shuffle(randomItems);
 
-                        randomItems.sort(compare);
+                        //randomItems.sort(compare);
                                                 
                         randomItems[0].thumbnail = randomItems[0].thumbnail.replace('http://','https://');
                         
