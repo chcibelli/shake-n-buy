@@ -19,9 +19,9 @@ $( document ).ready(function() {
     });			
 
     $( "#main-btn" ).click(function() {
-        
-        $('#result').hide();
-        
+
+        $('.product-img').fadeOut();
+
         let tope = $('#tope').val();
         let site = 'MLA';
         let category = $('#hidden_categories').val();
@@ -47,6 +47,8 @@ $( document ).ready(function() {
                 $('#result').show();
             } else {
 
+                console.log(data.results);
+
                 var randomItems = [];
 
                 $.each(data.results, function(i,item){
@@ -70,6 +72,8 @@ $( document ).ready(function() {
 
                 Shuffle(randomItems);
                 Shuffle(randomItems);
+
+                randomItems[0].thumbnail = randomItems[0].thumbnail.replace('http://','https://');
 
                 let result = '<p><img src="'+randomItems[0].thumbnail+'" class="product-img"></p>';
                 result += '<p class="title">'+randomItems[0].title+'</p>';
