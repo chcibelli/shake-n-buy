@@ -5,6 +5,9 @@ $( document ).ready(function() {
     $.getJSON(apiCategories, function(data) {
         
         var availableCategories = [];
+
+        //availableCategories.push({label:'Todas las categorias', value:'TODO'});
+
         $.each(data, function(i,category){
             if(category.id == 'MLA1071' || category.id == 'MLA1540' || category.id == 'MLA1512') {
             } else {
@@ -36,7 +39,7 @@ $( document ).ready(function() {
         
         $('.form-signin').effect( "shake" );
         
-        let url = 'https://api.mercadolibre.com/sites/'+site+'/search?status=active&category='+category;
+        var url = 'https://api.mercadolibre.com/sites/'+site+'/search?status=active&category='+category;
         
         $.getJSON(url, function(data) {
             
