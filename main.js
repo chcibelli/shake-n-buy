@@ -58,8 +58,7 @@ $( document ).ready(function() {
                                             title:item.title,
                                             permalink:item.permalink,
                                             free_shipping:item.shipping.free_shipping,
-                                            listing_type:item.listing_type_id})
-                    }
+                                            listing_type:item.listing_type_id})};
                 });
 
                 if(randomItems.length < 1) {
