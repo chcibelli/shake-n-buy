@@ -32,14 +32,24 @@
 	
 	<link href="main.min.css" rel="stylesheet">
 	<script src="main.min.js?v=1.1"></script>
-
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-H6VHPRX5JL"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		
+		gtag('config', 'G-H6VHPRX5JL');
+	</script>	
+	
 </head>
 <body class="text-center">
 	
 	<main class="form-signin">
 		<h1 class="h3 mb-4 fw-normal">¿No sabes qué comprar? 🤔 🤔 🤔</h1>
 		<h1 class="h3 mb-4 fw-normal">Te doy una idea random YA! ⚡</h1>
-
+		
 		<div class="form-floating mb-3">
 			<select class="form-select form-select-sm" id="hidden_categories">
 				<option selected value="">Elegí la categoría</option>
@@ -50,16 +60,16 @@
 			<input type="text" id="tope" class="form-control" id="floatingInput" value="">
 			<label for="floatingInput">¿Cuánto queres gastar en $ARS?</label>
 		</div>
-
+		
 		<button class="w-100 btn btn-lg btn-primary mb-3" id="main-btn" type="button">¿Qué me compro?</button>
-
+		
 		<div class="mb-3 mt-3" id="share2"></div>		
 		<div class="mb-3" id="result">
-
+			
 			<p id="melibox"><img src="img/caja.jpg" class="product-img" alt="¿qué me compro?"></p>
-
+			
 		</div>
-
+		
 		<div class="mb-3 mt-3" id="share"></div>
 		
 		<hr>
