@@ -96,7 +96,7 @@ $( document ).ready(function() {
                         twttr.widgets.load();
                         
                         $('#result').html(result);
-                        $('#result, #share').show();         
+                        $('#result, #share').show();  
                     }
                 });			
             });	
