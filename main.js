@@ -27,7 +27,7 @@ $( document ).ready(function() {
         let category = $('#hidden_categories').val();
         
         if(tope == '' || category == '') {
-            $('#result').html('<p>Elegí una categoróa y completa cuanto queres gastar 🤔</p>');
+            $('#result').html('<p>Elegí una categoría y completa cuanto queres gastar 🤔</p>');
             $('#result').show();
             $('#share').html('');
             $('#share').hide();
