@@ -95,8 +95,8 @@ $( document ).ready(function() {
                         result += '<a target="_blank" href="'+randomItems[0].permalink+'" class="w-100 btn btn-lg btn-primary mb-3">Comprar ahora</a>';
                         result += '<p class="divider"></p>'
                         
-                        let tweet = '¿No sabes qué comprar o regalar?';
-                        tweet += ' 📦 📦 Busca tu próxima compra random de Mercado Libre en 👇 ';
+                        let tweet = '¿No sabes qué regalar esta navidad 🎄🎄🎄 ?';
+                        tweet += ' 📦 📦 Busca tu próximo regalo random en Mercado Libre 👇 ';
                         
                         $('#share').html('<a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large"  data-url="https://chcibelli.github.io/shake-n-buy/" data-text="'+tweet+'">Tweet</a>');
                         twttr.widgets.load();
