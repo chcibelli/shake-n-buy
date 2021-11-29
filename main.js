@@ -18,13 +18,19 @@ $( document ).ready(function() {
             }
         });
         
+        $('#hidden_categories').append(new Option('', ''));
         for(t=0;t<availableCategories.length;t++) {
             $("#hidden_categories").append(new Option(availableCategories[t].label, availableCategories[t].value));
         }
+        $('#hidden_categories option:first').attr('disabled', 'disabled');
         
     });			
     
-    $( "#main-btn" ).click(function() {
+    $( '#hidden_categories' ).change( function() {
+        defaultDisplay();
+    });
+
+    $( '#main-btn' ).click(function() {
         
         $('.product-img').fadeOut();
         
@@ -33,26 +39,19 @@ $( document ).ready(function() {
         let category = $('#hidden_categories').val();
         
         if(tope == '' || category == '') {
-            $('#result').html('<p>Elegí una categoría y completa cuanto queres gastar 🤔</p>');
-            $('#result').show();
-            $('#share').html('');
-            $('#share').hide();
+            defaultDisplay();
             return false;
         }
         
         $('.form-signin').effect( "shake" );
-        
+        $('#result').html('').hide();
+        $('#share').html('').hide();
         var url = 'https://api.mercadolibre.com/sites/'+site+'/search?status=active&category='+category;
-        
         $.getJSON(url, function(data) {
             
             if (typeof data.results === "undefined") {
-                $('#result').html('<p> No encontre nada por ese precio 😢</p>');
-                $('#share').html('');
-                $('#share').hide();
-                $('#result').show();
+                noResults();
             } else {
-                                
                 var randomItems = [];
                 
                 $.each(data.results, function(i,item){
@@ -64,21 +63,20 @@ $( document ).ready(function() {
                             permalink:item.permalink,
                             free_shipping:item.shipping.free_shipping,
                             listing_type:item.listing_type_id,
-                            difference:(item.price/tope*100)})};
-                        });
+                            difference:(item.price/tope*100)}
+                        )
+                    }
+                });
                         
-                        if(randomItems.length < 1) {
-                            $('#result').html('<p> No encontre nada por ese precio 😢</p>');
-                            $('#share').html('');
-                            $('#share').hide();
-                            $('#result').show();    
-                            return false;
-                        }
+                if(randomItems.length < 1) {
+                    noResults();
+                    return false;
+                }
                         
-                        Shuffle(randomItems);
-                        Shuffle(randomItems);
+                Shuffle(randomItems);
+                Shuffle(randomItems);
 
-                        //randomItems.sort(compare);
+                //randomItems.sort(compare);
 
                         showedItems.push(randomItems[0].id);
                                                 
@@ -101,49 +99,58 @@ $( document ).ready(function() {
                         $('#share').html('<a class="twitter-share-button" href="https://twitter.com/intent/tweet" data-size="large"  data-url="https://chcibelli.github.io/shake-n-buy/" data-text="'+tweet+'">Tweet</a>');
                         twttr.widgets.load();
 
-                        if(step == 1) {
-                            $('#main-btn').html('No me gusto, dame otra cosa!');
-                            step = 2;
-                        } else {
-                            $('#main-btn').html('Sigue sin gustarme! Otra!');
-                            step = 1;
-                        }
+                if(step == 1) {
+                    $('#main-btn').html('¡Dame otra opción!');
+                    step = 2;
+                } else {
+                    $('#main-btn').html('¡Mejor otra opción más!');
+                    step = 1;
+                }
 
-                        $('#result').html(result);
-                        $('#result, #share').show();  
-                    }
-                });			
-            });	
+                $('#result').html(result);
+                $('#result, #share').show();  
+            }
+        });			
+    });	
             
-            $('#tope').on('keypress',function(e) {
-                if(e.which == 13) {
-                    $('#main-btn').click();
-                    return false;
-                }
-                if (e.which > 31 && (e.which < 48 || e.which > 57)) {
-                    return false;
-                }
-                
-                return true;
-            });
+    $('#tope').on('keypress',function(e) {
+        if(e.which == 13) {
+            $('#main-btn').click();
+            return false;
+        }
+        if (e.which > 31 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+        
+        return true;
+    });
             
-            function Shuffle(o) {
-                for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-                return o;
-            };
+    function Shuffle(o) {
+        for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        return o;
+    }
+    
+    function defaultDisplay(){
+        $('#main-btn').html('¿Qué me compro?');
+        $('#result').html('<p>Elegí una categoría y completá cuanto queres gastar 🤔</p>').show();
+        $('#share').html('').hide();
+    }
 
-            function compare(a, b) {
-                const bandA = a.difference;
-                const bandB = b.difference;
-              
-                let comparison = 0;
-                if (bandA < bandB) {
-                  comparison = 1;
-                } else if (bandA > bandB) {
-                  comparison = -1;
-                }
-                return comparison;
-              }
-                          
-            
-        });
+    function noResults(){
+        $('#result').html('<p> No encontré nada por ese precio 😢</p>').show();
+        $('#share').html('').hide();
+    }
+
+    function compare(a, b) {
+        const bandA = a.difference;
+        const bandB = b.difference;
+        
+        let comparison = 0;
+        if (bandA < bandB) {
+            comparison = 1;
+        } else if (bandA > bandB) {
+            comparison = -1;
+        }
+        return comparison;
+    }
+});
