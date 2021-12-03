@@ -76,7 +76,7 @@ $( document ).ready(function() {
                 Shuffle(randomItems);
                 Shuffle(randomItems);
 
-                //randomItems.sort(compare);
+                randomItems.sort(compare);
 
                         showedItems.push(randomItems[0].id);
                                                 
